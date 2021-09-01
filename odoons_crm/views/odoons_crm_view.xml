@@ -5,7 +5,7 @@
         <field name="model">crm.lead</field>
         <field name="inherit_id" ref="crm.crm_lead_view_form"/>
         <field name="arch" type="xml">
-            <!-- this line hide the button in the view form crm-->
+            <!-- this line hide the button automated probability in the view form crm-->
             <xpath expr="//button[@name='action_set_automated_probability']" position="attributes">
                 <attribute name="invisible">True</attribute>
             </xpath>
