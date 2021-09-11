@@ -7,7 +7,7 @@
     'website': "http://www.normandweb.com",
     'category': "Uncategorized",
     'version': '13.0.1',
-    'depends': ['base'],
+    'depends': ['base','mail'],
     'data': [
         'security/groups.xml',
         'security/ir.model.access.csv',

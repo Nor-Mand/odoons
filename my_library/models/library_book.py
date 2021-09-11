@@ -8,11 +8,12 @@ class Library(models.Model):
     _description = 'Library Book'
     _order = 'date_release asc, name'
     _rec_name = 'short_name'
+    _inherit = ['mail.thread','mail.activity.mixin']
 
     name = fields.Char('Title', required=True) #ok
     author_ids = fields.Many2many('res.partner', string='Authors') #ok
     short_name = fields.Char('Short Title', required=True) #ok
-    notes = fields.Text('Internal Notes') #ok
+    notillas = fields.Text('Internal Notes',track_visibility='onchange') #ok
     state = fields.Selection(
         [('draft','Not Available'),('available','Available'),('lost','Lost')],'State') #ok
     description = fields.Html('Description')
@@ -27,6 +28,7 @@ class Library(models.Model):
     currency_id = fields.Many2one('res.currency', string='Currency')#ok
     retail_price = fields.Monetary('Retail Price', currency_id='currencey_id') #ok
     publisher_id = fields.Many2one('res.partner', string='Publisher') #ok
+    publisher_city = fields.Char('Publisher City', related='publisher_id.city',readonly=True)
     category_id = fields.Many2one('library.book.category') #ok
     age_days = fields.Float(string='Days Since Release',
                             compute='_compute_age',

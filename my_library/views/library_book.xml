@@ -21,13 +21,14 @@
                             <field name="name"/>
                             <field name="author_ids" widget="many2many_tags"/>
                             <field name="short_name"/>
-                            <field name="notes"/>
+                            <field name="notillas"/>
                             <field name="state"/>
                             <field name="pages"/>
                         </group>
                         <group>
                             <field name="cover" widget="image" class="oe_avatar"/>
                             <field name="publisher_id"/>
+                            <field name="publisher_city"/>
                             <field name="category_id"/>
                         </group>
                     </group>
@@ -49,6 +50,12 @@
                         <field name="description"/>
                     </group>
                 </sheet>
+            <!--  add chatter     -->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
             </form>
         </field>
     </record>
