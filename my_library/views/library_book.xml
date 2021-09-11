@@ -17,11 +17,36 @@
             <form>
                 <sheet>
                     <group>
-                        <field name="name"/>
-                        <field name="author_ids" widget="many2many_tags"/>
+                        <group>
+                            <field name="name"/>
+                            <field name="author_ids" widget="many2many_tags"/>
+                            <field name="short_name"/>
+                            <field name="notes"/>
+                            <field name="state"/>
+                            <field name="pages"/>
+                        </group>
+                        <group>
+                            <field name="cover" widget="image" class="oe_avatar"/>
+                            <field name="publisher_id"/>
+                            <field name="category_id"/>
+                        </group>
                     </group>
                     <group>
-                        <field name="data_release"/>
+                        <group>
+                            <field name="date_release"/>
+                            <field name="date_updated"/>
+                            <field name="age_days"/>
+                            <field name="out_of_print"/>
+                        </group>
+                        <group>
+                            <field name="reader_rating"/>
+                            <field name="cost_price"/>
+                            <field name="retail_price"/>
+                            <field name="currency_id"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="description"/>
                     </group>
                 </sheet>
             </form>
@@ -34,7 +59,8 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
-                <field name="data_release"/>
+                <field name="date_release"/>
+                <field name="author_ids" widget="many2many_tags"/>
             </tree>
         </field>
     </record>
