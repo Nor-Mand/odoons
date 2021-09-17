@@ -15,7 +15,7 @@ class Library(models.Model):
     short_name = fields.Char('Short Title', required=True) #ok
     notillas = fields.Text('Internal Notes',track_visibility='onchange') #ok
     state = fields.Selection(
-        [('draft','Not Available'),('available','Available'),('lost','Lost')],'State') #ok
+        [('draft','Unavailable'),('available','Available'),('borrowed','Borrowed'),('lost','Lost')],'State', default='draft') #ok
     description = fields.Html('Description')
     cover = fields.Binary('Book Cover') #ok
     out_of_print = fields.Boolean('Out of Print?') #ok
@@ -64,9 +64,22 @@ class Library(models.Model):
                 raise models.ValidationError(
                 'Release date must be in the past'
                 )
+    @api.model
+    def _is_allowed_transition(self, old_state, new_state):
+        allowed = [('draft','available'),
+                   ('available','borrowed'),
+                   ('borrowed','available'),
+                   ('available','Lost'),
+                   ('borrowed','lost'),
+                   ('lost','available')]
+        return (old_state, new_state) in allowed
 
-class ResPartner(models.Model):
-    _inherit = 'res.partner'
+    def change_state(self, new_state):
+        for book in self:
+            if book.is_allowed_transtion(book.state, new_state):
+                book.state = new_state
+            else:
+                continue
 
-    published_book_ids = fields.One2many('library.book', 'publisher_id', string='Published Books')
-    authored_book_ids = fields.Many2many('library.book', string='Authored Books')
+
+
