@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="photographer_action" model="ir.actions.act_window">
+        <field name="name">Panel Control</field>
+        <field name="res_model">photographer</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Photographer" id="photographer_root" web_icon="odoons_photographer,static/description/icon.png"/>
+    <menuitem name="Register" id="photographer_menu" parent="photographer_root" action="photographer_action"/>
+</odoo>
